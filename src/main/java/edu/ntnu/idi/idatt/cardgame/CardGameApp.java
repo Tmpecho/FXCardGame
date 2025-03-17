@@ -1,8 +1,6 @@
 package edu.ntnu.idi.idatt.cardgame;
 
-import edu.ntnu.idi.idatt.cardgame.domain.Card;
-import edu.ntnu.idi.idatt.cardgame.domain.DeckOfCards;
-import edu.ntnu.idi.idatt.cardgame.view.CardView;
+import edu.ntnu.idi.idatt.cardgame.controller.CardDeckController;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -13,11 +11,9 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import java.util.List;
-import java.util.stream.IntStream;
 
 public class CardGameApp extends Application {
-	private final DeckOfCards deck = new DeckOfCards();
+	private final CardDeckController cardDeckController = new CardDeckController();
 
 	@Override
 	public void start(Stage stage) {
@@ -35,17 +31,7 @@ public class CardGameApp extends Application {
 		Label resultLabel = new Label();
 		resultLabel.setStyle("-fx-font-size: 18;");
 
-		dealButton.setOnAction(e -> {
-			List<Card> hand = deck.dealHand(5);
-			cardContainer.getChildren().clear();
-			IntStream.range(0, hand.size()).forEach(i -> {
-				CardView cardView = new CardView(hand.get(i));
-				cardView.playFadeIn(i * 50);
-				cardContainer.getChildren().add(cardView);
-			});
-			boolean flush = DeckOfCards.isFlush(hand);
-			resultLabel.setText(flush ? "Flush!" : "Not a flush.");
-		});
+		dealButton.setOnAction(e -> cardDeckController.handleDeal(cardContainer, resultLabel));
 
 		BorderPane root = new BorderPane();
 		root.setTop(header);
