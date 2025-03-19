@@ -32,7 +32,6 @@ public class CardView extends BorderPane {
 		topBox.setAlignment(Pos.TOP_LEFT);
 		BorderPane.setMargin(topBox, new Insets(5, 0, 0, 5));
 
-		// Center region: Large suit image
 		ImageView centerImageView = new ImageView(suitImage);
 		centerImageView.setFitWidth(40);
 		centerImageView.setPreserveRatio(true);
