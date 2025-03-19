@@ -101,4 +101,30 @@ public class CardDeckControllerTest {
 		Exception ex2 = assertThrows(IllegalArgumentException.class, () -> controller.isFlush(List.of()));
 		assertEquals("Hand cannot be null or empty.", ex2.getMessage());
 	}
+
+	@Test
+	public void testCalculateSum() {
+		Label sumLabel = new Label();
+		List<Card> hand1 = Arrays.asList(
+				new Card(Suit.HEARTS, Rank.ACE),
+				new Card(Suit.HEARTS, Rank.TWO),
+				new Card(Suit.HEARTS, Rank.THREE),
+				new Card(Suit.HEARTS, Rank.FOUR),
+				new Card(Suit.HEARTS, Rank.FIVE)
+		);
+		controller.setLastHand(hand1);
+		controller.calculateSum(sumLabel);
+		assertEquals("Sum: 15", sumLabel.getText());
+
+		List<Card> hand2 = Arrays.asList(
+				new Card(Suit.HEARTS, Rank.NINE),
+				new Card(Suit.HEARTS, Rank.TEN),
+				new Card(Suit.HEARTS, Rank.JACK),
+				new Card(Suit.HEARTS, Rank.QUEEN),
+				new Card(Suit.HEARTS, Rank.KING)
+		);
+		controller.setLastHand(hand2);
+		controller.calculateSum(sumLabel);
+		assertEquals("Sum: 55", sumLabel.getText());
+	}
 }
