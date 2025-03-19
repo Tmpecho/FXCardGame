@@ -36,9 +36,4 @@ public record Card(Suit suit, Rank rank) {
 			throw new IllegalArgumentException("Suit and rank cannot be null.");
 		}
 	}
-
-	@Override
-	public String toString() {
-		return rank.getDisplay() + " of " + suit;
-	}
 }
