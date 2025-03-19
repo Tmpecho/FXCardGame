@@ -11,6 +11,8 @@ import java.util.List;
 import java.util.stream.IntStream;
 
 public class CardDeckController {
+	public static final int HAND_SIZE = 5;
+	public static final int CARD_FADE_TIME = 50;
 	private final DeckOfCards deck;
 
 	public CardDeckController() {
@@ -18,12 +20,12 @@ public class CardDeckController {
 	}
 
 	public void handleDeal(FlowPane cardContainer, Label resultLabel) {
-		List<Card> hand = dealHand(5);
+		List<Card> hand = dealHand(HAND_SIZE);
 		cardContainer.getChildren().clear();
 		IntStream.range(0, hand.size()).forEach(idx -> {
 			CardView cardView = new CardView(hand.get(idx));
-			cardView.playFadeIn(idx * 50);
 			cardContainer.getChildren().add(cardView);
+			cardView.playFadeIn(idx * CARD_FADE_TIME);
 		});
 		boolean flush = isFlush(hand);
 		resultLabel.setText(flush ? "Flush!" : "Not a flush.");

@@ -1,10 +1,10 @@
 package edu.ntnu.idi.idatt.cardgame.domain;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.ArrayList;
 
 public class DeckOfCards {
 	private List<Card> cards;
@@ -21,10 +21,6 @@ public class DeckOfCards {
 		shuffle();
 	}
 
-	public void shuffle() {
-		Collections.shuffle(cards);
-	}
-
 	public int getSize() {
 		return cards.size();
 	}
@@ -33,5 +29,9 @@ public class DeckOfCards {
 		List<Card> selectedCards = new ArrayList<>(cards.subList(0, n));
 		cards.subList(0, n).clear();
 		return selectedCards;
+	}
+
+	private void shuffle() {
+		Collections.shuffle(cards);
 	}
 }
