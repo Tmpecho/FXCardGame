@@ -28,6 +28,10 @@ public class CardDeckController {
 			cardView.playFadeIn(idx * CARD_FADE_TIME);
 		});
 		boolean flush = isFlush(hand);
+		setResultLabel(resultLabel, flush);
+	}
+
+	public static void setResultLabel(Label resultLabel, boolean flush) {
 		resultLabel.setText(flush ? "Flush!" : "Not a flush.");
 	}
 
